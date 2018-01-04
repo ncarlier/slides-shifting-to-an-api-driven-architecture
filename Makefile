@@ -7,8 +7,8 @@ build:
 	echo "Building website..."
 	npm install
 	npm run dist
-	mkdir -p _build/assets _build/img
-	cp -R css fonts _build/assets/
+	mkdir -p _build/_assets _build/img
+	cp -R css fonts _build/_assets/
 	cp img/*.* _build/img
 	echo "Website built."
 .PHONY: build
