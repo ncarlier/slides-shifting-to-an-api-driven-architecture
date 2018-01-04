@@ -1,0 +1,16 @@
+{
+  "name": "keycloak-todomvc-slides",
+  "version": "1.0.0",
+  "description": "Slides of the demonstration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "reveal-md slides.md",
+    "dist": "reveal-md slides.md --static _build"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "reveal-md": "^1.0.0"
+  }
+}
