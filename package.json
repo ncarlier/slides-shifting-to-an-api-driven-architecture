@@ -1,7 +1,7 @@
 {
-  "name": "keycloak-todomvc-slides",
+  "name": "slides-shifting-to-an-api-driven-architecture",
   "version": "1.0.0",
-  "description": "Slides of the demonstration.",
+  "description": "Shifting to an API-Driven Architecture (slides).",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
