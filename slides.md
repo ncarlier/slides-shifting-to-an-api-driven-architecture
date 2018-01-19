@@ -42,7 +42,8 @@ revealOptions:
 
 Note:
 
-bla bla bla
+Before we roll our fingers on the keyboard, we need to take a step back and take
+the time to ask ourselves important questions about the API architecture we want to build.
 
 ----
 
@@ -50,6 +51,11 @@ bla bla bla
 
 - Public?
 - Private?
+
+Note:
+
+Is our API public? On the Internet? Or is our API private, used by internal or
+external systems?
 
 ----
 
@@ -59,6 +65,11 @@ bla bla bla
 - A machine?
 - A mobile device?
 
+Note:
+
+For what type of consumer? A human? A machine? A machine with specific
+constraints such as a mobile device?
+
 ----
 
 ## For what purpose?
@@ -67,6 +78,16 @@ bla bla bla
 - Manage resources (CRUD)?
 - Trigger actions?
 - Publish/subscribe events (Streaming)?
+- ...
+
+Note:
+
+And finally for what purpose? For technical use? Or a business use?
+Serving a simple resource management service (CRUD) for something more complex,
+such as a remote function or process? For synchronous or asynchronous use?
+Or for a particular use such as streaming?
+
+All those questions should be address! And don't be a fool...
 
 ----
 
@@ -79,6 +100,15 @@ bla bla bla
 > An API to rule them all, one API to find them, One API to bring them all and
 > in the darkness bind them.
 
+Note:
+
+Not all API architectures are built in the same way.
+Functional Requirements AND non-functional requirements have an impact on your
+design.
+In this presentation, we will try to present you the concepts and tools that
+seem useful to us to choose an API oriented architecture adapted to your
+challenges.
+
 ---
 
 ### Select your paradigm
@@ -88,6 +118,12 @@ bla bla bla
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Operation
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Resource
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Data
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Function
+
+Note:
+
+Let's choose our first concept: the paradigm. Are we concerned by a model based
+on operations, resources, data or functions?
 
 ----
 
@@ -105,6 +141,21 @@ bla bla bla
 - [Apache Thrift](https://thrift.apache.org/)
 - [Apache Avro](http://avro.apache.org)
 
+Note:
+
+The technologies around the operational model are undoubtedly the oldest and
+therefore the most mastered.
+We are talking about...
+
+SOAP is still widely used. Although not particularly appreciated because of its
+verbosity and its old fashion tooling, SOAP is still today a robust solution and
+adapted to most RPC usages.
+
+But in IT, performance and efficiency matter. This is why alternatives have
+emerged to bring significant gains on these aspects.
+
+We can find...
+
 ----
 
 ### Operation: Key features
@@ -115,18 +166,36 @@ bla bla bla
 - Efficient/Modular serialization implementation
 - Efficient/Modular transport mechanism
 
+Note:
+
+Operational model have those key features: ...
+
 ----
 
 ### Resource
 
 > About resource manipulation
 
+Note:
+
+Another well known paradigm is the resource manipulation.
+This was mainly brought by REST....
+
 ----
 
 ### Resource: Technologies
 
 - REST (representational state transfer)
-- REST SOUP (basically SOAP with JSON)
+- RESTFul (representational state transfer)
+- RESTAwful SOUP (basically SOAP with JSON)
+
+Note:
+
+REST is about...
+
+A common design "alternative" is to mix the operational and resource models.
+If you don't have a good recipe, you get a RESTawful SOUP that is relatively
+indigestible from a code and usage point of view.
 
 ----
 
@@ -137,11 +206,34 @@ bla bla bla
 - Cacheability
 - Uniform interface
 
+Note:
+
+Resource model have those key features: ...
+
+----
+
+### Quick FOCUS on REST
+
+- Principles
+- Pitfalls
+- ...
+
+Note:
+
+Let's have a quick focus on REST.
+...
+
 ----
 
 ### Data
 
 > About structured data manipulation
+
+Note:
+
+REST is cool but have some drawbacks.
+And let's move on another emerging paradigm: the data manipulation.
+This was mainly brought by GraphQL....
 
 ----
 
@@ -160,6 +252,22 @@ bla bla bla
 - Query and Mutation
 - Client friendly
 
+Note:
+
+Data model have those key features: ...
+
+----
+
+### FOCUS on GraphQL
+
+- example
+- query/mutation
+
+Note:
+
+As for REST, let's have a quick focus on GraphQL.
+...
+
 ---
 
 ### Select your data protocol
@@ -168,6 +276,11 @@ bla bla bla
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Human friendly
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Machine friendly
+
+Note:
+
+Move on to our second topic: the selection of the data protocol
+...
 
 ----
 
@@ -293,6 +406,7 @@ Binary data protocol:
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> API management
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> IAM
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> FaaS
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Service registry
 
 ----
@@ -308,7 +422,7 @@ Binary data protocol:
 
 ## What is NOT API management
 
-- API beautyfier/performer
+- API beautyfier/performer (lipstick on a pig)
 - API translator
 - About business logic
 - Firewall
