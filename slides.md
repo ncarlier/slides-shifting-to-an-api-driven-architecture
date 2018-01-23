@@ -353,14 +353,15 @@ Note: jf
 
 ---
 
-### Select your **data protocol**
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![H vs M](img/human-vs-machine.svg)
+
+### Select your **data protocol**
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Human friendly
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Machine friendly
 
-<!-- .element: class="fragment" -->![H vs M](img/human-vs-machine.svg)
 
 Note: n
 

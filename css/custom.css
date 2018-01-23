@@ -84,9 +84,10 @@ section.little-prince img {
 
 section.section img {
   position: fixed;
-  left: -20%;
-  top: 5%;
-  width: 30%;
+  left: 25%;
+  top: 50%;
+  width: 50%;
+  opacity: 0.1;
 }
 
 section.sauron img {
