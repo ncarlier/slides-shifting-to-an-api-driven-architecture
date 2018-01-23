@@ -214,13 +214,22 @@ Resource model have those key features: ...
 
 ### Quick FOCUS on REST
 
-- Principles
-- Pitfalls
+- Now the most popular choice for API development
+- REST is not about using HTTP and JSON, JSON-RPC is not REST
+- It is an architetcure style specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm )
+- Based on 6 constraints
+- It is mainly about resources (business entities) and their representational state stransfer
+- 
+
 - ...
 
 Note:
 
 Let's have a quick focus on REST.
+Roy Fielding dissertation "Architectural Styles and the Design of Network-based Software Architecture"
+Very flexible: data is not tied to methods and resources
+Ability to handle multiple types of calls and data formatt: XML, JSON, YAML ...
+Structural changes enabled by HATEOS: Hypermedia As The Engine of system State
 ...
 
 ----
