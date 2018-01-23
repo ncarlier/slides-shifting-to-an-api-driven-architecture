@@ -216,7 +216,7 @@ Resource model have those key features: ...
 
 - Now the most popular choice for API development
 - REST is not about using HTTP and JSON, JSON-RPC is not REST
-- It is an architetcure style specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
+- It is an architetcure style for Network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 - Based on 6 constraints: client-server, stateless, cache, uniform interface, layered system, code on demand (optional)
 - Mostly about stateless servers and structured access to resource (business entities)
 
@@ -270,17 +270,18 @@ A contract is established between the consumers and the provider in the form of 
 Defines datatypes, queries and mutations
 A single endpoint to serve all queries and mutations
 Consumers specifies which data they want to get back: avoid under and over fetching
+GraphiQL as a generic client
 
 ----
 
 ### FOCUS on GraphQL
 
-- example
-- query/mutation
+![GraphQL example](img/graphQL.JPG)
 
 Note:
 
 REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.
+This is particalrly true for mobile Apps.
 ...
 
 ---
