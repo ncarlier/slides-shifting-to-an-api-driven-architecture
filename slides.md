@@ -40,10 +40,11 @@ revealOptions:
 
 ![little-prince](img/little-prince.png)
 
-Note:
+Note: jf
 
 Before we roll our fingers on the keyboard, we need to take a step back and take
-the time to ask ourselves important questions about the API architecture we want to build.
+the time to ask ourselves important questions about the API architecture we want
+to build.
 
 ----
 
@@ -52,7 +53,7 @@ the time to ask ourselves important questions about the API architecture we want
 - Public?
 - Private?
 
-Note:
+Note: jf
 
 Is our API public? On the Internet? Or is our API private, used by internal or
 external systems?
@@ -65,7 +66,7 @@ external systems?
 - A machine?
 - A mobile device?
 
-Note:
+Note: jf
 
 For what type of consumer? A human? A machine? A machine with specific
 constraints such as a mobile device?
@@ -80,14 +81,14 @@ constraints such as a mobile device?
 - Publish/subscribe events (Streaming)?
 - ...
 
-Note:
+Note: jf
 
 And finally for what purpose? For technical use? Or a business use?
 Serving a simple resource management service (CRUD) for something more complex,
 such as a remote function or process? For synchronous or asynchronous use?
 Or for a particular use such as streaming?
 
-All those questions should be address! And don't be a fool...
+n: All those questions should be address! And don't be a fool...
 
 ----
 
@@ -100,61 +101,75 @@ All those questions should be address! And don't be a fool...
 > An API to rule them all, one API to find them, One API to bring them all and
 > in the darkness bind them.
 
-Note:
+Note: n
 
 Not all API architectures are built in the same way.
-Functional Requirements AND non-functional requirements have an impact on your
-design.
-In this presentation, we will try to present you the concepts and tools that
-seem useful to us to choose an API oriented architecture adapted to your
-challenges.
+Functional Requirements AND non-functional requirements have a strong impact on
+your design.
+In this presentation, we will try to give you a brief overview of concepts and
+tools useful to build an API oriented architecture adapted to your requirements.
 
 ---
 
-### Select your paradigm
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![Paradigm](img/paradigm.svg)
+
+### Select your **paradigm**
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Operation
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Resource
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Data
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Function
 
-Note:
+Note: n
 
 Let's choose our first concept: the paradigm. Are we concerned by a model based
-on operations, resources, data or functions?
+on operation, resource, data or function?
 
 ----
 
-### Operation (RPC)
+### Operation
 
 > About apply an operation on something
 
+Note: n
+
+It's...
+Basically, you call a remote procedure. You get the point, we're talking about
+RPC in a more technical way.
+
 ----
 
-### Operation: Technologies
+### Operation (RPC): Technologies
 
 - RMI (just kidding)
 - SOAP (no kidding... almost)
 - [gRPC](https://grpc.io/) (based on [Protocol Buffers](https://developers.google.com/protocol-buffers/))
 - [Apache Thrift](https://thrift.apache.org/)
 - [Apache Avro](http://avro.apache.org)
+- [TChannel](https://github.com/uber/tchannel)...
 
-Note:
+Note: n
 
 The technologies around the operational model are undoubtedly the oldest and
 therefore the most mastered.
 We are talking about...
 
 SOAP is still widely used. Although not particularly appreciated because of its
-verbosity and its old fashion tooling, SOAP is still today a robust solution and
-adapted to most RPC usages.
+verbosity and its old fashion tooling, SOAP is still today a reliable and well
+known service contract between two industrial actors.
 
 But in IT, performance and efficiency matter. This is why alternatives have
 emerged to bring significant gains on these aspects.
 
 We can find...
+We still have a service contract, but less verbose and using much more efficient
+underlying technology: like structured data, binary protocols.
+
+For the record, gRPC is widely used by google's internal services. Thrift is
+used by high performant products like Cassandra. And Uber created his own open
+protocol for his internals: TChannel.
 
 ----
 
@@ -166,9 +181,13 @@ We can find...
 - Efficient/Modular serialization implementation
 - Efficient/Modular transport mechanism
 
-Note:
+Note: n
 
-Operational model have those key features: ...
+Here the key features of the operational model:
+This is highly typed, therefore you reduce errors and facilitate tooling such as
+code and documentation generators.
+Resource usage is a first class concern. Therefore data serialization and data
+transport are efficient.
 
 ----
 
@@ -176,7 +195,7 @@ Operational model have those key features: ...
 
 > About resource manipulation
 
-Note:
+Note: n
 
 Another well known paradigm is the resource manipulation.
 This was mainly brought by REST....
@@ -185,18 +204,19 @@ This was mainly brought by REST....
 
 ### Resource: Technologies
 
-- REST (representational state transfer)
-- RESTFul (representational state transfer)
-- RESTAwful SOUP (basically SOAP with JSON)
+- RESTful (representational state transfer): structured access to resources
+- RESTAwful SOUP (basically SOAP with JSON): less structured
 
-Note:
+Note: n
 
-REST is mostly about stateless servers and structured access to resources (business entities) enabling light coupling.
+REST is mostly an "architectural style" built upon Web technologies.
+It's a structured access to resources.
 
-A common design "alternative" is to mix the operational and resource models.
-If you don't have a good recipe, you get a RESTawful SOUP that is relatively
-indigestible from a code and usage point of view.
-Risk to create "RPC-like" interface on top of HTTP and JSON leading to high-coupling.
+A less structured design commonly used is to mix the operational and resource
+models.
+In a lack of a decent recipe, you will get a REST SOUP that is awful (from a
+code and usage point of view).
+We will get back to it in a moment.
 
 ----
 
@@ -204,30 +224,55 @@ Risk to create "RPC-like" interface on top of HTTP and JSON leading to high-coup
 
 - Web friendly
 - Human readable
-- Cacheability
 - Uniform interface
 
-Note:
+Note: n
 
-Resource model have those key features: ...
+Resource model have those key features:
+It's Web friendly because build on top of web technologies. Therefore you inherit
+some powerful features like cache management, security, routing, etc.
+Most of the time JSON is used as data protocol. Therefor it is human readable
+and as a result easy to debug or understand.
+It's an uniform interface that simplifies and decouples the architecture,
+which enables parts to evolve independently.
 
 ----
 
-### Quick FOCUS on REST
+### Quick FOCUS on REST  (1/2)
 
-- Now the most popular choice for API development
-- REST is not about using HTTP and JSON, JSON-RPC is not REST
-- It is an architetcure style for Network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
-- Based on 6 constraints: client-server, stateless, cache, uniform interface, layered system, code on demand (optional)
+- It is an **architecture style** for network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 - Mostly about stateless servers and structured access to resource (business entities)
 
-Note:
+Note: jf
 
-- Let's have a quick focus on REST.
-- Roy Fielding dissertation "Architectural Styles and the Design of Network-based Software Architecture".
-- Very flexible: data is not tied to methods and resources.
-- Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
-- Structural changes enabled by HATEOS: Hypermedia As The Engine of system State.
+Let's have a quick focus on REST...
+
+Its' currently he most popular choice for API development
+It's not just about HTTP and JSON (JSON-RPC is not REST)
+
+Roy Fielding dissertation "Architectural Styles and the Design of network-based
+Software Architecture".
+
+Very flexible: data is not tied to methods and resources.
+Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
+Structural changes enabled by HATEOS: Hypermedia As The Engine of system State.
+
+----
+
+### Quick FOCUS on REST  (2/2)
+
+Based on **6 big principles**:
+
+- Client/Server
+- Stateless
+- Cache
+- Uniform interface
+- Layered system
+- Code on demand (optional)
+
+Note: jf
+
+...
 
 ----
 
@@ -235,12 +280,12 @@ Note:
 
 > About structured data manipulation
 
-Note:
+Note: n
 
 REST is cool but have some drawbacks.
-In particular, multiplicity of endpoints, over and under data fetching.
-Too rigid for certain use cases.
-And let's move on another emerging paradigm: the data manipulation.
+Such as: multiplicity of endpoints, over or under data fetching, some
+rigidity...
+So let's move on another emerging paradigm: the data manipulation.
 This was mainly brought by GraphQL ...
 
 ----
@@ -252,53 +297,74 @@ This was mainly brought by GraphQL ...
 - ![GraphQL](img/graphql-logo.svg)
 - [GraphQL](http://graphql.org/) by Facebook
 
+Note: jf
+
+GraphQL was created by FB in response of particular concerns:
+- the multiplicity of endpoints in relation of the myriad of client apps.
+- the over/uder data fetching regarding the true need of the client app
+
+REST APIs have shown to be too inflexible to keep up with the rapidly changing
+requirements of the clients that access them.
+
+GraphQL was developed by Facebook to cope with the need for more flexibility and
+efficiency.
+
+This is particularly true for mobile Apps.
+
+Let's have a closer look to the technology:
+
 ----
 
-### Data: Key features
+### Deep (not so) dive into GraphQL (1/2)
+
+Concepts:
 
 - "It's Graphs All the Way Down"
-- [Specification](https://github.com/facebook/graphql) and Reference Implementation from Facebook 
-- Schema-driven development: data and operations
-- Two kinds of operation: Query and Mutation
-- Client friendly: self-describing enabling introspection
-- Different implementations including [graphql-java](https://github.com/graphql-java/graphql-java)
+- Schema definition Language (SDL)
+- Fetching relevant data with Query
+- Writing data with Mutations
+- Realtime updates with subscriptions
+- Single endpoint
 
-Note:
+Note: jf
 
-- REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.
-- This is particularly true for mobile Apps.
-- GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency.
-- Specification and Reference Implementation developped and maintained by Facebook.
-- A contract is established between the consumers and the provider in the form of a schema.
+- A contract is established between the consumers and the provider in the form
+  of a schema.
 - Defines datatypes, queries and mutations.
 - A single endpoint to serve all queries and mutations.
-- Consumers specifies which data they want to get back: avoid under and over fetching.
-- GraphiQL: generic client.
+- Consumers specifies which data they want to get back: avoid under and over
+  fetching.
+- Different implementations including [graphql-java](https://github.com/graphql-java/graphql-java)
+- self-describing enabling introspection
+- backport client complexity to dao
+- [Specification](https://github.com/facebook/graphql) and Reference Implementation from Facebook 
 
 ----
 
-### FOCUS on GraphQL
+### Deep (not so) dive into GraphQL (2/2)
 
-![GraphQL example](img/graphQL.JPG)
+![GraphQL example](img/graphql-query.png)
 
-Note:
+Note: jf
+
 - This is a typical GraqhQL query.
 - It consists in retrieving data from a given user.
 - The client provides ther userid and the data it wants to get back: the user name, the list of posts and the 3 last followers.
 
 ---
 
-### Select your data protocol
+### Select your **data protocol**
 
 <!-- .slide: class="no-dot" -->
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Human friendly
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Machine friendly
 
-Note:
+<!-- .element: class="fragment" -->![H vs M](img/human-vs-machine.svg)
+
+Note: n
 
 Move on to our second topic: the selection of the data protocol
-...
 
 ----
 
@@ -307,6 +373,7 @@ Move on to our second topic: the selection of the data protocol
 Textual data protocol:
 
 - &lt;XML/&gt;
+- YAML:
 - {JSON}
 
 ----
@@ -316,7 +383,7 @@ Textual data protocol:
 - Easy to read/debug/trace...
 - Ideal for web apps
 
-- Still performant... **but**:
+- Still [performant](http://blog.ippon.fr/2016/09/26/formats-et-methodes-de-serialisation-rest/)... **but**:
   - Weakly typed (without schema)
   - Heavy bandwidth (without compression)
   - Heavy memory footprint (at scale)
@@ -330,6 +397,7 @@ Binary data protocol:
 - [Protobuf](https://developers.google.com/protocol-buffers/)
 - [Apache Avro](https://avro.apache.org/)
 - [MessagePack](https://msgpack.org/): *"It's like JSON but fast and small."*
+- ...
 
 ----
 
@@ -337,19 +405,25 @@ Binary data protocol:
 
 - Very efficient (bandwidth, CPU, memory)
 - Safe (Highly typed, structured)
-- Ideal for... machines
+- Ideal for... machines and heavy load
 - **But** Hard to read/debug
 
 ---
 
-### Select your access control:
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![Access Granted](img/access-granted.svg)
+
+### Select your <br/> **access control**:
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Free 2 play
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> API key
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Token based
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> x509
+
+Note: n
+
+Move on to our next topic: the selection of the access control mechanism.
 
 ----
 
@@ -378,9 +452,12 @@ Binary data protocol:
 
 ---
 
-## Select your documentation:
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![RTFM](img/rtfm.svg)
+
+### Select your **documentation**:
+
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Auto generated
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Self carried
@@ -393,6 +470,10 @@ Binary data protocol:
 - WSDL
 - WADL
 - Protocol definition
+
+Note:
+
+JJS
 
 ----
 
@@ -418,9 +499,11 @@ Binary data protocol:
 
 ---
 
-## Select your versioning strategy:
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![Versions](img/versions.svg)
+
+### Select your <br/> **versioning strategy**:
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Versioning: a necessary evil
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> URL
@@ -439,9 +522,12 @@ Only if backward-incompatible. Can be avoided for internal API where control and
 
 ---
 
-## Select your tooling:
+<!-- .slide: class="no-dot section" -->
 
-<!-- .slide: class="no-dot" -->
+![Tooling](img/tooling.svg)
+
+### Select your tooling:
+
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> API management
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> IAM
@@ -476,7 +562,7 @@ Only if backward-incompatible. Can be avoided for internal API where control and
 
 - ![APIGee](img/apigee-logo.svg)
 - ![Tyk.io](img/tyk-logo.svg)
-- ![Kong](img/kong-logo.png)
+- ![Kong](img/kong-logo.svg)
 - ![Netflix Zuul](img/zuul-logo.svg)
 
 ---

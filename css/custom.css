@@ -82,6 +82,13 @@ section.little-prince img {
   filter: grayscale(100%);
 }
 
+section.section img {
+  position: fixed;
+  left: -20%;
+  top: 5%;
+  width: 30%;
+}
+
 section.sauron img {
   zoom: 25%;
 }
