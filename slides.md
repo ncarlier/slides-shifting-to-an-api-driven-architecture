@@ -216,19 +216,16 @@ Resource model have those key features: ...
 
 - Now the most popular choice for API development
 - REST is not about using HTTP and JSON, JSON-RPC is not REST
-- It is an architetcure style specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm )
-- Based on 6 constraints
-- It is mainly about resources (business entities) and their representational state stransfer
-- 
-
-- ...
+- It is an architetcure style specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
+- Based on 6 constraints: client-server, stateless, cache, uniform interface, layered system, code on demand (optional)
+- Mostly about stateless servers and structured access to resource (business entities)
 
 Note:
 
 Let's have a quick focus on REST.
 Roy Fielding dissertation "Architectural Styles and the Design of Network-based Software Architecture"
 Very flexible: data is not tied to methods and resources
-Ability to handle multiple types of calls and data formatt: XML, JSON, YAML ...
+Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
 Structural changes enabled by HATEOS: Hypermedia As The Engine of system State
 ...
 
@@ -258,12 +255,19 @@ This was mainly brought by GraphQL....
 ### Data: Key features
 
 - "It's Graphs All the Way Down"
+- [Specification](https://github.com/facebook/graphql) and Reference Implementation developed by Facebook 
+- Schema-driven development
 - Query and Mutation
 - Client friendly
 
 Note:
 
-Data model have those key features: ...
+GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency! 
+specification and Reference Implementation developped by Facebook
+A contract is established between the consumers and the provider in the form of a schema
+Defines datatypes, queries and mutations
+A single endpoint to serve all queries and mutations
+Consumers specifies which data they want to get back: avoid under and over fetching
 
 ----
 
@@ -274,7 +278,7 @@ Data model have those key features: ...
 
 Note:
 
-As for REST, let's have a quick focus on GraphQL.
+REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.
 ...
 
 ---
