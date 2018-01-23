@@ -400,6 +400,27 @@ Binary data protocol:
 
 ---
 
+## Select your versioning strategy:
+
+<!-- .slide: class="no-dot" -->
+
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Versioning: a necessary evil
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> URL
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Content-type
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Specific HTTP header
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> No versioning
+
+Note:
+
+Versioning is costly to you and the consumers.
+To be used with care: do not disrupt your consumers.
+Not for: addition of new resources, of data in the response, changed technologies (Java to Ruby), changed your application's services
+Only if backward-incompatible. Can be avoided for internal API where control and influence over all the consumers.
+
+...
+
+---
+
 ## Select your tooling:
 
 <!-- .slide: class="no-dot" -->
@@ -410,6 +431,8 @@ Binary data protocol:
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Service registry
 
 ----
+
+
 
 ## What is API management
 
