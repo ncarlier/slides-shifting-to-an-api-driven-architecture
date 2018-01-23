@@ -222,11 +222,11 @@ Resource model have those key features: ...
 
 Note:
 
-Let's have a quick focus on REST.
-Roy Fielding dissertation "Architectural Styles and the Design of Network-based Software Architecture"
-Very flexible: data is not tied to methods and resources
-Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
-Structural changes enabled by HATEOS: Hypermedia As The Engine of system State
+- Let's have a quick focus on REST.
+- Roy Fielding dissertation "Architectural Styles and the Design of Network-based Software Architecture".
+- Very flexible: data is not tied to methods and resources.
+- Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
+- Structural changes enabled by HATEOS: Hypermedia As The Engine of system State.
 ...
 
 ----
@@ -260,17 +260,19 @@ This was mainly brought by GraphQL....
 - Schema-driven development: data and operations
 - Two kinds of operation: Query and Mutation
 - Client friendly: self-describing enabling introspection
+- Different implementations including [graphql-java](https://github.com/graphql-java/graphql-java)
 
 Note:
 
-GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency
-Specification and Reference Implementation developped and maintained by Facebook
-Different implementations including 
-A contract is established between the consumers and the provider in the form of a schema
-Defines datatypes, queries and mutations
-A single endpoint to serve all queries and mutations
-Consumers specifies which data they want to get back: avoid under and over fetching
-GraphiQL as a generic client
+- REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.
+- This is particularly true for mobile Apps.
+- GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency.
+- Specification and Reference Implementation developped and maintained by Facebook.
+- A contract is established between the consumers and the provider in the form of a schema
+- Defines datatypes, queries and mutations
+- A single endpoint to serve all queries and mutations
+- Consumers specifies which data they want to get back: avoid under and over fetching
+- GraphiQL: generic client
 
 ----
 
@@ -279,10 +281,9 @@ GraphiQL as a generic client
 ![GraphQL example](img/graphQL.JPG)
 
 Note:
-
-REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.
-This is particalrly true for mobile Apps.
-...
+- This is a typical graqhQL query.
+- It consists in retrieving data from a given user.
+- The client provides ther userid and the data it wants to get back: the use name, the list of posts and the 3 last followers.
 
 ---
 
