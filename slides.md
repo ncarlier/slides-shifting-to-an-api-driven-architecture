@@ -238,6 +238,7 @@ Structural changes enabled by HATEOS: Hypermedia As The Engine of system State
 Note:
 
 REST is cool but have some drawbacks.
+Multiplicity of endpoints, over and under data fetching
 And let's move on another emerging paradigm: the data manipulation.
 This was mainly brought by GraphQL....
 
@@ -255,15 +256,16 @@ This was mainly brought by GraphQL....
 ### Data: Key features
 
 - "It's Graphs All the Way Down"
-- [Specification](https://github.com/facebook/graphql) and Reference Implementation developed by Facebook 
-- Schema-driven development
-- Query and Mutation
-- Client friendly
+- [Specification](https://github.com/facebook/graphql) and Reference Implementation from Facebook 
+- Schema-driven development: data and operations
+- Two kinds of operation: Query and Mutation
+- Client friendly: self-describing enabling introspection
 
 Note:
 
-GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency! 
-specification and Reference Implementation developped by Facebook
+GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency
+Specification and Reference Implementation developped and maintained by Facebook
+Different implementations including 
 A contract is established between the consumers and the provider in the form of a schema
 Defines datatypes, queries and mutations
 A single endpoint to serve all queries and mutations
