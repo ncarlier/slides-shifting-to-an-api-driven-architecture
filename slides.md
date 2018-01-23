@@ -191,11 +191,12 @@ This was mainly brought by REST....
 
 Note:
 
-REST is about...
+REST is mostly about stateless servers and structured access to resources (business entities) enabling light coupling.
 
 A common design "alternative" is to mix the operational and resource models.
 If you don't have a good recipe, you get a RESTawful SOUP that is relatively
 indigestible from a code and usage point of view.
+Risk to create "RPC-like" interface on top of HTTP and JSON leading to high-coupling.
 
 ----
 
@@ -227,7 +228,6 @@ Note:
 - Very flexible: data is not tied to methods and resources.
 - Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
 - Structural changes enabled by HATEOS: Hypermedia As The Engine of system State.
-...
 
 ----
 
@@ -238,9 +238,10 @@ Note:
 Note:
 
 REST is cool but have some drawbacks.
-Multiplicity of endpoints, over and under data fetching
+In particular, multiplicity of endpoints, over and under data fetching.
+Too rigid for certain use cases.
 And let's move on another emerging paradigm: the data manipulation.
-This was mainly brought by GraphQL....
+This was mainly brought by GraphQL ...
 
 ----
 
@@ -268,11 +269,11 @@ Note:
 - This is particularly true for mobile Apps.
 - GraphQL was developed by Facebook to cope with the need for more flexibility and efficiency.
 - Specification and Reference Implementation developped and maintained by Facebook.
-- A contract is established between the consumers and the provider in the form of a schema
-- Defines datatypes, queries and mutations
-- A single endpoint to serve all queries and mutations
-- Consumers specifies which data they want to get back: avoid under and over fetching
-- GraphiQL: generic client
+- A contract is established between the consumers and the provider in the form of a schema.
+- Defines datatypes, queries and mutations.
+- A single endpoint to serve all queries and mutations.
+- Consumers specifies which data they want to get back: avoid under and over fetching.
+- GraphiQL: generic client.
 
 ----
 
@@ -281,9 +282,9 @@ Note:
 ![GraphQL example](img/graphQL.JPG)
 
 Note:
-- This is a typical graqhQL query.
+- This is a typical GraqhQL query.
 - It consists in retrieving data from a given user.
-- The client provides ther userid and the data it wants to get back: the use name, the list of posts and the 3 last followers.
+- The client provides ther userid and the data it wants to get back: the user name, the list of posts and the 3 last followers.
 
 ---
 
