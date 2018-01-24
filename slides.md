@@ -207,6 +207,8 @@ This was mainly brought by REST....
 - RESTful (representational state transfer): structured access to resources
 - RESTAwful SOUP (basically SOAP with JSON): less structured
 
+<!-- .element: class="more" --> [OCTO refcard](https://blog.octo.com/strategie-d-architecture-api/)
+
 Note: n
 
 REST is mostly an "architectural style" built upon Web technologies.
@@ -326,6 +328,8 @@ Concepts:
 - Realtime updates with subscriptions
 - Single endpoint
 
+<!-- .element: class="more" --> [Node tutorial](https://medium.com/@tomlagier/scaffolding-a-rock-solid-graphql-api-b651c2a36438)
+
 Note: jf
 
 - A contract is established between the consumers and the provider in the form
@@ -365,7 +369,11 @@ Note: jf
 
 Note: n
 
-Move on to our second topic: the selection of the data protocol
+Move on to our second topic: the selection of the data protocol.
+As you can imagine the way you transmit data matter.
+Basically you have the choice to be human or machine friendly.
+The choice will depends who is your consumer and what are your constraints
+regarding bandwidth and performance.
 
 ----
 
@@ -376,6 +384,13 @@ Textual data protocol:
 - &lt;XML/&gt;
 - YAML:
 - {JSON}
+
+Note: n
+
+Textual data protocols are well known and mainly those.
+XML is gradually replaced by JSON. More concise and readable.
+YAML is even more concise and readable but a little bit harder to parse by
+machines.
 
 ----
 
@@ -389,6 +404,11 @@ Textual data protocol:
   - Heavy bandwidth (without compression)
   - Heavy memory footprint (at scale)
 
+Note:
+
+So the key features are: ...
+But there are some drawbacks that you should consider..
+
 ----
 
 ### Machine friendly
@@ -400,6 +420,13 @@ Binary data protocol:
 - [MessagePack](https://msgpack.org/): *"It's like JSON but fast and small."*
 - ...
 
+Note: n
+
+Here we are the alternative: the binary data protocol
+These protocols are successful on mobile phones (as with protobuf), for internal
+services communication, or for serialization of data for well known products
+such as Hadoop, Cassandra, Redis, etc..
+
 ----
 
 ### Binary protocol
@@ -408,6 +435,19 @@ Binary data protocol:
 - Safe (Highly typed, structured)
 - Ideal for... machines and heavy load
 - **But** Hard to read/debug
+
+Note:
+
+Binary protocols are undoubtedly very effective in terms of resource
+utilization.
+They are also reliable to use because they are highly typed and defined by
+schemas.
+It's a very good choice for machine 2 machine communication and when performance
+matter.
+
+BUT, they are difficult to read and debug.
+Therefore, it may not be a good idea to use this type of protocol a mainstream
+external interface.
 
 ---
 
@@ -430,17 +470,41 @@ Move on to our next topic: the selection of the access control mechanism.
 
 ## Free 2 Play
 
-- but restricted
-- rate limiting
+- Public... but restricted
+- Rate limiting
 - IP restriction
+- Usage monitoring
 - ...
+
+Note:
+
+In other words, no authentication. Public API.
+But not having an AuthN mechanism does not mean not setting up some level of
+access control.
+Such as a rate limiting filter that protects the API from abuse.
+An IP ban system for suspicious users.
+An appropriate monitoring system showing us the detailed use of our API.
+etc.
+
 
 ----
 
 ## API Key
 
-- clever for some needs
-- Basic auth
+- Not secure... but ideal for some needs
+- Good practices:
+  - Hashed storage
+  - Obtains with strong authentication mechanism
+  - For a limited scope of the API (reads, non sensitive actions, etc.)
+  - Using basic-auth over SSL
+
+Note:
+
+API key is a single secret sent to the server as credentials.
+It's a very poor way to authenticate someone.
+BUT, it's still something common to use in order to facilitate the inegration of
+other services. It's very simple to use.
+But you have to follow some good practices.
 
 ----
 
@@ -450,6 +514,10 @@ Move on to our next topic: the selection of the access control mechanism.
 - OpenID Connect
 - Macaroon
 
+Note:
+
+A more secure way to access an API is by using token based standard.
+A old one is OAuth2. ...
 
 ---
 
@@ -464,6 +532,10 @@ Move on to our next topic: the selection of the access control mechanism.
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Self carried
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Semi-auto generated
 
+Note: jf
+
+...
+
 ----
 
 ## Auto generated
@@ -472,9 +544,9 @@ Move on to our next topic: the selection of the access control mechanism.
 - WADL
 - Protocol definition
 
-Note:
+Note: jf
 
-JJS
+...
 
 ----
 
@@ -482,6 +554,10 @@ JJS
 
 - "Affordance"
 - HAL / HATEOAS
+
+Note: jf
+
+...
 
 ----
 
@@ -491,12 +567,20 @@ JJS
 - Swagger
 - OpenAPI
 
+Note: jf
+
+...
+
 ----
 
 ## **But**, this is not enough!
 
 > Most of the time, you have to provide a clean and human readable **online**
 > documentation.
+
+Note: jf
+
+...
 
 ---
 
@@ -506,13 +590,18 @@ JJS
 
 ### Select your <br/> **versioning strategy**:
 
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Versioning: a necessary evil
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> URL
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Content-type
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Specific HTTP header
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> No versioning
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> GET /v2/products
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Accept: application/vnd.myname.v2+json
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> X-API-Version: 2
+
+<!-- .element: class="more" --> [REST versioning](http://www.baeldung.com/rest-versioning)
 
 Note:
+
+Versioning should be consider at the early stage of development.
+Even if you don't yet plan an upcoming version.
+
+
 
 Versioning is costly to you and the consumers.
 To be used with care: do not disrupt your consumers.
