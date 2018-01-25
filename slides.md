@@ -64,12 +64,12 @@ external systems?
 
 - An human?
 - A machine?
-- A mobile device?
+- A thing?
 
 Note: jf
 
 For what type of consumer? A human? A machine? A machine with specific
-constraints such as a mobile device?
+constraints such as a mobile device, a car?
 
 ----
 
@@ -245,7 +245,7 @@ which enables parts to evolve independently.
 - It is an **architecture style** for network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 - Mostly about stateless servers and structured access to resource (business entities)
 
-Note: jf
+Note: j
 
 Let's have a quick focus on REST...
 
@@ -423,8 +423,8 @@ Binary data protocol:
 Note: n
 
 Here we are the alternative: the binary data protocol
-These protocols are successful on mobile phones (as with protobuf), for internal
-services communication, or for serialization of data for well known products
+These protocols are popular on Android (as with protobuf), for internal
+services communication, or for date serialization of well known products
 such as Hadoop, Cassandra, Redis, etc..
 
 ----
@@ -470,11 +470,11 @@ Move on to our next topic: the selection of the access control mechanism.
 
 ## Free 2 Play
 
-- Public... but restricted
-- Rate limiting
-- IP restriction
-- Usage monitoring
-- ...
+- Public... but restricted:
+  - Rate limiting
+  - IP restriction
+  - Usage monitoring
+  - ...
 
 Note:
 
@@ -491,12 +491,12 @@ etc.
 
 ## API Key
 
-- Not secure... but ideal for some needs
+- Not very secure... but ideal for some needs
 - Good practices:
-  - Hashed storage
-  - Obtains with strong authentication mechanism
-  - For a limited scope of the API (reads, non sensitive actions, etc.)
-  - Using basic-auth over SSL
+  - Hashing the key into your datastore
+  - Obtains the key with strong AuthN mechanism
+  - Use it for a limited scope of the API (reads, non sensitive actions, etc.)
+  - With basic-auth over SSL
 
 Note:
 
@@ -510,14 +510,36 @@ But you have to follow some good practices.
 
 ## Token based
 
-- OAuth2
-- OpenID Connect
+- [OAuth2](https://tools.ietf.org/html/rfc6749)
+  (About AuthZ ... not AuthN)
+- [OpenID Connect](http://openid.net/connect)
+  (OAuth2 on steroids with AuthN and JWT)
 - Macaroon
 
 Note:
 
 A more secure way to access an API is by using token based standard.
-A old one is OAuth2. ...
+A old one is OAuth2. It's supported by almost all API providers.
+It's an authorization framework that enables a 3rd-party application to obtain
+limited access to an HTTP service.
+A more modern protocol is OpeID Connect. To be quick, it's OAuth2 on steroids
+with AuthN support and JWT.
+Macaroon is...
+
+----
+
+## x509
+
+- For **true sensitive** API...
+- ... when hardware is required
+- Using software certificate, maybe you should consider tokens.
+
+Note:
+
+x509 is mainly used by industrial, health and banking sector.
+Where API are very sensitives.
+It requires materials, and additional infrastructure (for PKI).
+If not material, please...
 
 ---
 
@@ -600,15 +622,14 @@ Note:
 
 Versioning should be consider at the early stage of development.
 Even if you don't yet plan an upcoming version.
+It's a signal to your consumers that the API will evolve. Therfore they have to
+be ready to evolve too.
 
+Versioning an API needs the ability to have a consistent and stable interface.
 
-
-Versioning is costly to you and the consumers.
-To be used with care: do not disrupt your consumers.
-Not for: addition of new resources, of data in the response, changed technologies (Java to Ruby), changed your application's services
-Only if backward-incompatible. Can be avoided for internal API where control and influence over all the consumers.
-
-...
+Where to put this version? As you want you have the choice.
+What's is more important is to offer a stable interface and the ability to
+support 2 different version at same moment (please consider feature flipping).
 
 ---
 
@@ -621,32 +642,45 @@ Only if backward-incompatible. Can be avoided for internal API where control and
 
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> API management
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> IAM
-- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> FaaS
+- <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> CMS
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Service registry
+
+Note:
+
+And here we are our last topic. The tooling.
+A good API architecture rely on several more or less big tools.
+We can find...
 
 ----
 
-
-
-## What is API management
+## About API management...
 
 - API gateway (AuthN/AuthZ/Trafic control/Routing/Logging/Analytics/Monitoring/Transformation)
 - Analytic platform (TSDB/RT Monitoring)
-- Development portal (CMS, Clinet registration)
+- Development portal (CMS, Client registration)
 - Facade API (aggregation/composition/transformation/micro routing)
+
+Note:
+
+A rapid focus about API management. It's about...
 
 ----
 
-## What is NOT API management
+## It's nothing about...
 
-- API beautyfier/performer (lipstick on a pig)
-- API translator
+- API beautyfier/performer (don't put lipstick on a pig... don't)
+- API translator (SOAP to SOUP)
 - About business logic
 - Firewall
 
+Note:
+
+And the warnings! Because we many miss usage.
+It's not ...
+
 ----
 
-## Here come the  competitors
+## Here come the competitors!
 
 <!-- .slide: class="no-dot logos" -->
 
@@ -654,6 +688,14 @@ Only if backward-incompatible. Can be avoided for internal API where control and
 - ![Tyk.io](img/tyk-logo.svg)
 - ![Kong](img/kong-logo.svg)
 - ![Netflix Zuul](img/zuul-logo.svg)
+
+Note:
+
+And we can tell that we have the choice.
+A full feature closed solution that also make the coffee.
+A full feature open solution that growing.
+A limited but efficient open solution.
+And a very good Framework in case you want to built your own.
 
 ---
 
