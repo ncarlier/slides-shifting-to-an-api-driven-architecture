@@ -40,11 +40,13 @@ revealOptions:
 
 ![little-prince](img/little-prince.png)
 
-Note: jf
+Note:
 
-Before we roll our fingers on the keyboard, we need to take a step back and take
-the time to ask ourselves important questions about the API architecture we want
-to build.
+In this presentation, we’re going to talk about API design, Web API design and how it relates to software architecture.
+Because designing an API must be thought of carefully. It is highly visible, exposed to the outside and acts as a contract between you and your users. If you want it to be successful and to last, it must be carefully designed upfront with backward compatibility in mind.
+
+Let’s start with this wonderful story “Le petit prince” from Antoine de Saint Exupery. We propose to  change a little the story line, today is the API Day and the “Petit prince” doesn’t want us to draw a sheep but anAPI, if possible a beautiful API.
+So what are the guiding questions to draw a beautiful API?
 
 ----
 
@@ -53,10 +55,12 @@ to build.
 - Public?
 - Private?
 
-Note: jf
+Note:
 
-Is our API public? On the Internet? Or is our API private, used by internal or
-external systems?
+First of all, what is the scope of my API? 
+- Is it a public one: open to everybody on the Web? With people not registered in advance
+- Conversely, is it a private one: dedicated to a well-known population, inside a defined organization, with direct control over the context.
+This question relates to security and versioning strategy.
 
 ----
 
@@ -66,10 +70,14 @@ external systems?
 - A machine?
 - A thing?
 
-Note: jf
+Note:
 
-For what type of consumer? A human? A machine? A machine with specific
-constraints such as a mobile device, a car?
+I must design my API for my clients, the consumers not for me.
+So who are they:
+- human-beings requiring a lot flexibility in terms of interaction and dialog
+- Machines following a well-defined protocol
+- a thing, Mobile Apps requiring a lot flexibility in terms of data access
+This question relates to the protocol, the data format.
 
 ----
 
@@ -81,14 +89,15 @@ constraints such as a mobile device, a car?
 - Publish/subscribe events (Streaming)?
 - ...
 
-Note: jf
+Note:
 
-And finally for what purpose? For technical use? Or a business use?
-Serving a simple resource management service (CRUD) for something more complex,
-such as a remote function or process? For synchronous or asynchronous use?
-Or for a particular use such as streaming?
+Now that I know them, I must ask my users, what they want to do with the AP, what are there expecations:
+- Which kind of exchange? Technical-oriented (exchanging raw-data) or business-oriented (with well-defined  use cases)?
+- Is it about doing CRUD (Create Read Update Delete) operations on business entities (called resources in the API jargon)?
+- Is it to trigger actions on a server or on actuators?
+- Is it event-based with publication and subscription mechanisms?
+This question relates to the paradigm of the API.
 
-n: All those questions should be address! And don't be a fool...
 
 ----
 
@@ -101,7 +110,7 @@ n: All those questions should be address! And don't be a fool...
 > An API to rule them all, one API to find them, One API to bring them all and
 > in the darkness bind them.
 
-Note: n
+Note:
 
 Not all API architectures are built in the same way.
 Functional Requirements AND non-functional requirements have a strong impact on
@@ -122,7 +131,7 @@ tools useful to build an API oriented architecture adapted to your requirements.
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Data
 - <!-- .element: class="fragment" --> <i class="fa fa-square-o"></i> Function
 
-Note: n
+Note:
 
 Let's choose our first concept: the paradigm. Are we concerned by a model based
 on operation, resource, data or function?
@@ -133,7 +142,7 @@ on operation, resource, data or function?
 
 > About apply an operation on something
 
-Note: n
+Note:
 
 It's...
 Basically, you call a remote procedure. You get the point, we're talking about
@@ -150,7 +159,7 @@ RPC in a more technical way.
 - [Apache Avro](http://avro.apache.org)
 - [TChannel](https://github.com/uber/tchannel)...
 
-Note: n
+Note:
 
 The technologies around the operational model are undoubtedly the oldest and
 therefore the most mastered.
@@ -181,7 +190,7 @@ protocol for his internals: TChannel.
 - Efficient/Modular serialization implementation
 - Efficient/Modular transport mechanism
 
-Note: n
+Note:
 
 Here the key features of the operational model:
 This is highly typed, therefore you reduce errors and facilitate tooling such as
@@ -195,7 +204,7 @@ transport are efficient.
 
 > About resource manipulation
 
-Note: n
+Note:
 
 Another well known paradigm is the resource manipulation.
 This was mainly brought by REST....
@@ -209,7 +218,7 @@ This was mainly brought by REST....
 
 <!-- .element: class="more" --> [OCTO refcard](https://blog.octo.com/strategie-d-architecture-api/)
 
-Note: n
+Note:
 
 REST is mostly an "architectural style" built upon Web technologies.
 It's a structured access to resources.
@@ -228,7 +237,7 @@ We will get back to it in a moment.
 - Human readable
 - Uniform interface
 
-Note: n
+Note:
 
 Resource model have those key features:
 It's Web friendly because build on top of web technologies. Therefore you inherit
@@ -245,19 +254,15 @@ which enables parts to evolve independently.
 - It is an **architecture style** for network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 - Mostly about stateless servers and structured access to resource (business entities)
 
-Note: j
+Note:
 
-Let's have a quick focus on REST...
-
-Its' currently he most popular choice for API development
-It's not just about HTTP and JSON (JSON-RPC is not REST)
-
-Roy Fielding dissertation "Architectural Styles and the Design of network-based
-Software Architecture".
-
-Very flexible: data is not tied to methods and resources.
-Ability to handle multiple types of calls and data formats: XML, JSON, YAML ...
-Structural changes enabled by HATEOS: Hypermedia As The Engine of system State.
+REST has become the most popular choice for API development. It stands for “representational state transfer,” and is basically an architecture style for network-based software specified by Dr. Roy Fielding in 2000.
+His dissertation is about 160 pages long, it is not that easy to read and many people haven’t done it have their own idea of what REST is, often leading to confusion and disagreement.
+To make a long story short, REST is mostly about stateless servers and structured access to resources. Typically a resource is a business entity from the domain you’re working on:
+- It can be a ticket in a reservation system,
+- Or an invoice in a billing system.
+Clients and servers exchange the states of these resources using a representation such as JSON.
+These representations are then potentially modifiable, with actions and relationships discoverable via hypermedia. Hypermedia is fundamental to REST, and is just the concept of providing links to other resources. REST is designed to be hypermedia driven
 
 ----
 
@@ -272,9 +277,15 @@ Based on **6 big principles**:
 - Layered system
 - Code on demand (optional)
 
-Note: jf
+Note:
 
-...
+Here are the 6 constraints or principles that fundamentally define a REST-architecture style.
+- Client-server client and server applications MUST be able to evolve separately without any dependency on each other.
+- Stateless: REST APIs are stateless. Each call contains all of the data necessary to process it, including security data.  
+- Cache:  more exactly client-cache. Because a stateless API can increase request overhead, a REST API should be designed to encourage the storage of cacheable data. This means that when data is cacheable, the response should indicate that it can be stored up to a certain time (expires-at). 
+- Uniform Interface: The key to the client-server decoupling is having a uniform interface that allows independent evolutions of  both. This interface should provide a standardized means of communicating, typically using HTTP with URI resources, CRUD operations (Create, Read, Update, Delete) and JSON. REST doesn’t prescript to use HTTP, but if you do it recommends to utilize HTTP features whenever possible, instead of inventing conventions.
+- Layered system: the system can be made of different layers such as FWs, proxies, Load balancers, routers to improve scalability and security. All the client knows is the API, not the different layers.
+- Code on demand: is optional. It enables the server to transfer logic to the client. It has not been widely adopted due to security concern.
 
 ----
 
@@ -282,7 +293,7 @@ Note: jf
 
 > About structured data manipulation
 
-Note: n
+Note:
 
 REST is cool but have some drawbacks.
 Such as: multiplicity of endpoints, over or under data fetching, some
@@ -299,21 +310,17 @@ This was mainly brought by GraphQL ...
 - ![GraphQL](img/graphql-logo.svg)
 - [GraphQL](http://graphql.org/) by Facebook
 
-Note: jf
+Note:
+
+REST APIs have shown to be too inflexible to keep up with the rapidly changing
+requirements of the clients that access them.
 
 GraphQL was created by FB in response of particular concerns:
 - the multiplicity of endpoints in relation of the myriad of client apps.
 - the over/uder data fetching regarding the true need of the client app
 
-REST APIs have shown to be too inflexible to keep up with the rapidly changing
-requirements of the clients that access them.
-
-GraphQL was developed by Facebook to cope with the need for more flexibility and
-efficiency.
-
-This is particularly true for mobile Apps.
-
-Let's have a closer look to the technology:
+The specification and the Reference Implementation have been developed by Facebook. There are different implementations such as graphql-java.
+Let's have a closer look to the technology.
 
 ----
 
@@ -330,18 +337,12 @@ Concepts:
 
 <!-- .element: class="more" --> [Node tutorial](https://medium.com/@tomlagier/scaffolding-a-rock-solid-graphql-api-b651c2a36438)
 
-Note: jf
+Note:
 
-- A contract is established between the consumers and the provider in the form
-  of a schema.
-- Defines datatypes, queries and mutations.
-- A single endpoint to serve all queries and mutations.
-- Consumers specifies which data they want to get back: avoid under and over
-  fetching.
-- Different implementations including [graphql-java](https://github.com/graphql-java/graphql-java)
-- self-describing enabling introspection
-- backport client complexity to dao
-- [Specification](https://github.com/facebook/graphql) and Reference Implementation from Facebook 
+A contract is established between the consumers and the provider in the form of a schema (written in SDL) defining datatypes, queries and mutations.
+A single endpoint is able to serve all queries and mutations. 
+It delegates the operations to resolvers which are the glue with business logic.
+On each request consumers specifies exactly which data they want to get back. This prevents under and over data fetching.
 
 ----
 
@@ -349,11 +350,12 @@ Note: jf
 
 ![GraphQL example](img/graphql-query.png)
 
-Note: jf
+Note:
 
-- This is a typical GraqhQL query.
-- It consists in retrieving data from a given user.
-- The client provides ther userid and the data it wants to get back: the user name, the list of posts and the 3 last followers.
+This is a typical GraqhQL query. It consists in retrieving data from a given user.
+The client provides the userid and the data it wants to get back: the user name, the list of posts and the 3 last followers.
+In the answer, we can see the exact needed data. 
+A key challenge on the server side is the efficiency of the Data Loading mechanism in place. A naive approach can lead to poor performance and scalability. Batching requests and caching results are recommended as with the FaceBook  DataLoader.
 
 ---
 
@@ -589,9 +591,12 @@ Note: jf
 - Swagger
 - OpenAPI
 
-Note: jf
+Note:
 
-...
+RAML: stands for RESTful API Modeling Language.  It promotes a top-down spec-driven approach covering the whole lifecycle: design, build, test, document, share. Design can be made in an iterative manner, and be tested and simulated without any development to gather user feedbacks. Once the design is validated, development can start
+RAML was released in 2013. Mulesoft has been its main contributor with support from Paypal, CISCO … It was clearly the most consistent and complete approach until a recent date.
+Swagger: is the most popular solution. It provides documentation tied directly to the source code. It is very well integrated with frameworks. 
+Open API Initiative is managed by the Linux Foundation since 2015. It is based on the Swagger 3.0 specification. In April 2017, Mulesoft, the main sponsor of RAML, has decided to join it. So we can expect a convergence.
 
 ----
 
@@ -624,6 +629,22 @@ Versioning should be consider at the early stage of development.
 Even if you don't yet plan an upcoming version.
 It's a signal to your consumers that the API will evolve. Therfore they have to
 be ready to evolve too.
+
+Versioning APIs is much more subtle than versioning software. Because upgrading an API version just breaks the compatibility and requires significant efforts both on the server and client sides.
+It is a necessary evil and is important to plan for.
+Version upgrades must be used only for backward-incompatible changes.
+In particular, avoid it for:
+1.	Addition of resources: consumers can ignore them if they wish
+2.	Addition of data in the response: for the same reason
+3.	Changed technologies on the server: which be hidden by the uniform interface.
+
+From a technical standpoint, REST versioning can be achieved in 3 different ways, none of them being perfect:
+1.	By including the version number in the URI: for instance http://myhost/v1/user. This is the most convenient approach technically speaking but with some drawbacks: large URI footprint, all or nothing approach,
+2.	Using a specific HTTP header: such as “api-version”, URIs are preserved, but this approach is not supported by any standard,
+3.	Using Content-type: for instant “application/json+v1” (request Accept, response Content-Type), URIs are preserved but custom content types are difficult to manage and test. 
+4.	No versioning remains possible for a private API.
+
+
 
 Versioning an API needs the ability to have a consistent and stable interface.
 
