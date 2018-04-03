@@ -1,12 +1,34 @@
 ---
-title: Shifting to an API-Driven Architecture
+title: Draw me an API
 css: css/index.css
 watch: true
 revealOptions:
     transition: 'linear'
 ---
 
-### >> (ing) to an <br/> **API-Driven** **Architecture**
+<!-- .slide: class="little-prince" -->
+
+# Draw me an API
+
+![little-prince](img/little-prince.png)
+
+Note:
+
+In this presentation, we’re going to talk about API design, Web API design and
+how it relates to software architecture.
+
+Because designing an API must be thought of carefully.
+It is highly visible, exposed to the outside and acts as a contract between you
+and your users.
+If you want it to be successful and to last, it must be carefully designed
+upfront with backward compatibility in mind.
+
+Let’s start with this wonderful story "Le petit prince" from Antoine de Saint
+Exupery.
+We propose to  change a little the story line, today the “Petit prince” doesn’t
+want us to draw a sheep but an API, if possible a beautiful API.
+
+So what are the guiding questions to draw a beautiful API?
 
 ---
 
@@ -32,33 +54,8 @@ revealOptions:
 
 ![Worldline](img/worldline-logo.png)
 
+
 ---
-
-<!-- .slide: class="little-prince" -->
-
-## Draw me an API
-
-![little-prince](img/little-prince.png)
-
-Note:
-
-In this presentation, we’re going to talk about API design, Web API design and
-how it relates to software architecture.
-
-Because designing an API must be thought of carefully.
-It is highly visible, exposed to the outside and acts as a contract between you
-and your users.
-If you want it to be successful and to last, it must be carefully designed
-upfront with backward compatibility in mind.
-
-Let’s start with this wonderful story "Le petit prince" from Antoine de Saint
-Exupery.
-We propose to  change a little the story line, today the “Petit prince” doesn’t
-want us to draw a sheep but an API, if possible a beautiful API.
-
-So what are the guiding questions to draw a beautiful API?
-
-----
 
 ## For which scope?
 
