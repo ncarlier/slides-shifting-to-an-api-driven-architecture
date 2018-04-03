@@ -292,7 +292,7 @@ But beware! It's maybe not the best choice regarding you true needs.
 ### Quick FOCUS on REST  (1/2)
 
 - It is an **architecture style** for network-based Software specified by [Dr. Roy Fielding in 2000](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
-- Mostly about stateless, discoverable and structured access to resource (business entities)
+- Mostly about stateless, discoverable and structured access to resources (business entities)
 
 Note:
 
