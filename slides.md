@@ -95,7 +95,7 @@ So who are they:
 
 - Human beings need simplicity, readability and quick understanding.
 - Machines need performance, precision and structured dialogue.
-- a thing, it's also a machine but with some additional constrains, such as the
+- a thing, it's also a machine but with some additional constraints, such as the
   resource usage.
 
 This question will influence the choice of communication protocols and data
@@ -116,7 +116,7 @@ Note:
 And finally, for what purpose?
 
 - Which kind of exchange? Technical-oriented (exchanging raw-data) or
-  business-oriented (with well-defined  use cases)?
+  business-oriented (with well-defined use cases)?
 - Is it about doing CRUD (Create Read Update Delete) operations on business
   entities?
 - Is it to trigger actions on a server or on actuators?
@@ -200,7 +200,7 @@ known service contract between two industrial actors.
 But in IT, performance and efficiency matter.
 This is why alternatives have emerged to bring significant gains on these aspects.
 We still have a service contract, but less verbose and using much more efficient
-underlying technology: like structured data, binary protocols.
+underlying technology: like structured data and binary protocols.
 
 There are many alternatives (maybe too many?):
 gRPC, Apache Thrift, Apache Avro, TCHannel, ...
@@ -227,6 +227,10 @@ Here the key features of the operational model:
 code and documentation generators.
 - Resource usage is a first class concern. Therefore data serialization and data
 transport are efficient.
+
+Therefore, when the exchange contract with your consumer is well defined,
+relatively rigid and performance needs are high.
+This paradigm could be relevant.
 
 ----
 
@@ -283,7 +287,7 @@ Key features are:
 - It's an uniform interface that simplifies and decouples the architecture,
   which enables parts to evolve independently.
 
-Because it's the most human-friendly paradigm it's the more used.
+Because it's the most human-friendly paradigm it's the most used.
 But beware! It's maybe not the best choice regarding you true needs.
 
 ----
@@ -392,10 +396,12 @@ Note:
 
 REST APIs have shown to be too inflexible to keep up with the rapidly changing
 requirements of the clients that access them.
+As a result, another paradigm has emerged.  The data model.
 
 GraphQL was created by FB in response of particular concerns:
-- the multiplicity of endpoints in relation of the myriad of client apps.
-- the over/uder data fetching regarding the true need of the client app
+- First: the multiplicity of endpoints in relation of the myriad of client apps.
+- And finally: the over/uder data fetching regarding the true need of the client
+  app
 
 The specification and the Reference Implementation have been developed by
 Facebook.
@@ -515,12 +521,11 @@ and trace.
 This is perhaps the best choice for web applications.
 
 Is it performant? Actually, yes!
-Many benchmarks show that passers have evolved perfectly to compete (in therm of
-speed) with binary protocols.
+Many benchmarks show that parsers have evolved perfectly to compete (in therm of
+speed, not bandwidth!) with binary protocols.
 But, this protocol is still not perfect.
 It's weakly typed (without the usage of a JSON schema). So it's error prone.
-Resources usage are still high regarding the bandwidth and the memory footprint
-needs by the parsers.
+Resources usage are still high regarding the bandwidth and the memory footprint.
 
 ----
 
@@ -625,8 +630,8 @@ Note:
 
 API key is a single secret sent to the server as credentials.
 It's a very poor way to authenticate someone.
-BUT, it's still something common to use in order to facilitate the inegration of
-other services.
+BUT, it's still something commonly used in order to facilitate the integration
+of other services.
 This mechanism is popular when using webhooks (such as for Github, TravisCI,
 Slack,...).
 It's very simple to use, but you have to follow some good practices.
@@ -651,7 +656,7 @@ with AuthN support and JWT.
 
 ----
 
-## x509
+## Certificates
 
 - For **true sensitive** API...
 - ... when hardware is required
@@ -659,11 +664,12 @@ with AuthN support and JWT.
 
 Note:
 
-x509 is mainly used by industrial, health and banking sectors.
+Client certificates are mainly used by industrial, health and banking sectors.
 Where API are very sensitives.
-It's alos often used when a strong partnership is established between two
+It's also often used when a strong partnership is established between two
 services providers.
-It requires materials, and additional infrastructure (for PKI).
+It requires materials, and additional infrastructure (such as a Public Key
+Infrastructure).
 If not material, please...
 
 ---
@@ -681,19 +687,34 @@ If not material, please...
 
 Note:
 
-...
+Move on to our next topic: the documentation!
+
+Undoubtedly the most important subject. Especially if we're talking about a
+public API.
+
+Writing proper documentation can be painful and a task not so easy to do, but
+fortunately technology is there to help you.
+
+Some technologies bring us (almost for free): auto-generated,
+semi-auto-generated or self-carried documentation.
 
 ----
 
 ## Auto generated
 
-- WSDL
-- WADL
+- WSDL (Web Service Description Language)
+- WADL (Web Application Description Language)
 - Protocol definition
 
 Note:
 
-...
+Automatically generated documentation uses the API definition schema to produce
+the documentation.
+Basically you have this for free for SOAP and all other protocol definition
+systems (such as Protobuf, Avro, etc.).
+There is an initiative for REST called WADLn.
+But the adoption seems too be not that good.
+
 
 ----
 
@@ -704,7 +725,19 @@ Note:
 
 Note:
 
-...
+When the documentation is self carried by the API we are talking about the
+affordance of an API.
+Or in another definition, the ability to explore and understand the API simply
+through its manipulation.
+
+In REST, something commonly used for this is HAL or HATEOS.
+Basically, you will add attributes to the payload of your response that will
+reference the links that can be called to navigate from this resource.
+For example if you request a resource describing a user, you will also get links
+allowing you to request their affiliate resources such as their orders.
+For instance the Twitter API expose this kind of links.
+By implementing standards such as HATEOS you will benefit some tools such as
+API browsers.
 
 ----
 
@@ -715,6 +748,15 @@ Note:
 - OpenAPI
 
 Note:
+
+These methods are powerful but have some limitations because they focus too much
+on the technical aspects.
+That's why semi-automatic documentation comes to the rescue.
+It is also an API descriptor but with more emphasis on the usage description.
+Therefore this method requires more human intervention from a drafting point of
+view.
+
+We can find one and a half major competitors.
 
 - RAML: stands for RESTful API Modeling Language.
   It promotes a top-down spec-driven approach covering the whole lifecycle:
@@ -742,7 +784,15 @@ Note:
 
 Note:
 
-...
+So technology helps you... but unfortunately it's often not enough.
+All major API provider are doing this.
+
+Documenting an API with examples, a getting started section, and advanced usages
+is for the moment only a human writing story.
+
+Content management system (or CMS) is not an option.
+But be simple and modern, try to choose a static content management system.
+Such as Hugo, Sphinx, AsciiDoc......
 
 ---
 
@@ -826,7 +876,7 @@ A rapid focus about API management. It's about...
 
 Note:
 
-And the warnings! Because we many miss usage.
+And the warnings! Because we saw too many miss usage.
 It's not ...
 
 ----
