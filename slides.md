@@ -42,6 +42,7 @@ So what are the guiding questions to draw a beautiful API?
   - **Jean-Francois James**
   - <i class="fa fa-twitter"></i> [@jefrajames](https://twitter.com/jefrajames)
   - <i class="fa fa-pencil"></i> [Worldline engineering Blog](https://blog.worldline.tech)
+  - <i class="fa fa-pencil"></i> [Personal Blog](https://jefrajames.wordpress.com/)
 - ![@ncarlier](img/ncarlier.jpg)
   - **Nicolas Carlier**
   - <i class="fa fa-twitter"></i> [@ncarlier](https://twitter.com/ncarlier)
